@@ -27,6 +27,7 @@
   margin-top: 30px;
   background-color:#b34242;
   height: 80px;
+  clear: both;
 }
 .footer p {
     margin: 0 14px 37px;
@@ -46,4 +47,11 @@
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+.menu {
+  margin-left: 414px;
+  margin-top: -93px;
+}
+ul a{
+  color:#f3f3f3;
 }
