@@ -23,21 +23,65 @@ class Form extends React.Component {
     let name= this.refs.name.value;
     let email= this.refs.email.value;
     let phone= this.refs.phone.value;
-    let addess= this.refs.address.value;
+    let address= this.refs.address.value;
     let message= this.refs.message.value;
 
-     let data = {
+    if(this.state.act ===0){
+      let data ={
+        name,email,phone,address,message
+      }
+      datas.push(data);
+    }else{
+      let index = this.state.index;
+      datas[index].name =name;
+      datas[index].email =email;
+      datas[index].phone =phone;
+      datas[index].address =address;
+      datas[index].message =message;
+
+   }
+
+   this.setState({
+    datas:datas,
+    act:0
+  });
+
+     {/*let data = {
     name, email, addess, phone, message
   }
 
   datas.push(data);
+*/}
 
-  this.setState({
-    datas:datas
-  });
 
   this.refs.myform.reset();
   this.refs.name.focus();
+  }
+
+  fRemove = (i) =>{
+    let datas = this.state.datas;
+    datas.splice(i,1);
+    this.setState({
+      datas: datas
+    });
+   
+    this.refs.myform.reset();
+    this.refs.name.focus();
+  }
+
+  fEdit =(i) =>{
+    let data = this.state.datas[i];
+    this.refs.name.value = data.name;
+    this.refs.email.value = data.email;
+    this.refs.phone.value = data.phone;
+    this.refs.address.value = data.address;
+    this.refs.message.value = data.message;
+    
+    this.setState({
+      act:1,
+      index:1
+    });
+    
   }
 
   render(){
@@ -79,10 +123,10 @@ class Form extends React.Component {
                         <td>{data.name}</td>
                         <td>{data.email}</td>
                         <td>{data.phone}</td>
-                        <td>{data.addess}</td>
+                        <td>{data.address}</td>
                         <td>{data.message}</td>
-                       <button onClick={()=>this.fedit(i)} className="btn btn-info">Edit</button>
-                      <button onClick={()=>this.fedit(i)} className="btn btn-danger">Delete</button>
+                       <button onClick={()=>this.fEdit(i)} className="btn btn-info">Edit</button>
+                      <button onClick={()=>this.fRemove(i)} className="btn btn-danger">Delete</button>
                       </tr>
                     )}
                     </tbody>
